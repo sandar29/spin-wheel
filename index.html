@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SpinFlow – Fair. Fast. Offline.</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="top">
+ <div class="brand"><span class="mark" aria-hidden="true"></span><div><b>SpinFlow</b><small>Fair. Fast. Offline.</small></div></div>
+ <span class="badge"><i></i>Offline Mode</span>
+ <nav class="actions">
+  <button id="bPanel" title="Tampilkan/sembunyikan panel">Panel</button>
+  <button id="bPres" title="Presentation Mode (ESC untuk keluar)">Presentation</button>
+  <button id="bFs" title="Fullscreen (F)">Fullscreen</button>
+  <button id="bSet" class="pri" title="Settings">Settings</button>
+ </nav>
+</header>
+<main>
+ <section class="stage" id="stage">
+  <div id="stats" class="stats"></div>
+  <div class="wheelcard"><canvas id="wheel" width="1000" height="1000" aria-label="Spin wheel"></canvas></div>
+  <button id="spin" class="pri" title="Spin (Space / Enter)">SPIN</button>
+  <p class="hint">Tekan <kbd>Space</kbd> untuk memutar</p>
+ </section>
+ <aside class="side">
+  <div class="tabs" role="tablist">
+   <button data-t="p" role="tab" aria-selected="true">Peserta</button>
+   <button data-t="u" role="tab" aria-selected="false">Undian</button>
+   <button data-t="h" role="tab" aria-selected="false">Riwayat</button>
+  </div>
+  <section class="tab" data-tab="p">
+   <textarea id="bulk" rows="4" placeholder="Satu nama per baris"></textarea>
+   <div class="row"><button id="bImp" class="pri" title="Tambahkan semua baris sebagai peserta">Import Peserta</button></div>
+   <div class="row"><input id="one" placeholder="Nama peserta" maxlength="80" aria-label="Nama peserta"><button id="bAdd" class="fit" title="Tambah satu peserta">+ Tambah</button></div>
+   <div class="drop" id="drop" tabindex="0" role="button">Drop file here<small>TXT, CSV, JSON — atau klik untuk memilih</small></div>
+   <input type="file" id="file" accept=".txt,.csv,.json" hidden>
+   <label class="field">Duplikat saat import
+    <select id="dup"><option value="allow">Allow duplicates</option><option value="remove">Remove automatically</option><option value="ask">Ask before removing</option></select></label>
+   <input id="q" placeholder="Search participant" aria-label="Cari peserta">
+   <ul class="list" id="plist"></ul><p class="note" id="pnote"></p>
+   <div class="row"><button id="xT">Export TXT</button><button id="xC">Export CSV</button><button id="xJ">Export JSON</button></div>
+   <div class="row"><button id="bClear" class="dng" title="Hapus semua peserta">Clear All</button></div>
+  </section>
+  <section class="tab" data-tab="u" hidden>
+   <label class="field">Nama Hadiah / Kategori
+    <input id="cat" placeholder="Contoh: Kulkas / TV / Sepeda" maxlength="50" aria-label="Nama Hadiah atau Kategori"></label>
+   <label class="field">Number of Winners
+    <select id="wn"><option>1</option><option>2</option><option>3</option><option>5</option><option>10</option><option value="c">Custom</option></select></label>
+   <input id="wc" type="number" min="1" style="display:none" aria-label="Custom winners">
+   <label class="field">Mode
+    <select id="mode"><option value="seq">Sequential (putar satu per satu)</option><option value="inst">Instant Random</option></select></label>
+   <label class="field">Winner Removal
+    <select id="rem"><option value="1">Remove winner automatically</option><option value="0">Keep winner in wheel</option></select></label>
+   <h3>Reset</h3>
+   <div class="row"><button id="r1">Reset Wheel</button><button id="r2">Reset Winners</button></div>
+   <div class="row"><button id="r3" class="dng">Reset Session</button><button id="r4" class="dng">Factory Reset</button></div>
+  </section>
+  <section class="tab" data-tab="h" hidden>
+   <ul class="list tall" id="hlist"></ul>
+   <div class="row"><button id="hX" title="Export hasil (CSV)">Export Result</button><button id="hC" class="dng">Clear</button></div>
+  </section>
+ </aside>
+</main>
+<dialog id="dm"><div id="dmb"></div></dialog>
+<dialog id="ds"><h2>Settings</h2><div class="gs" id="gs"></div><div class="btns"><button class="pri" id="dsx">Close</button></div></dialog>
+<canvas id="fx" popover="manual"></canvas>
+<div id="toasts" aria-live="polite"></div>
+<script src="app.js"></script>
+</body></html>
