@@ -1,0 +1,12 @@
+{
+  "name": "SpinFlow – Fair. Fast. Offline.",
+  "short_name": "SpinFlow",
+  "description": "Roda undian offline yang adil dan cepat.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f5f7",
+  "theme_color": "#24456e",
+  "lang": "id",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

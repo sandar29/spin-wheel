@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SpinFlow – Fair. Fast. Offline.</title>
+<meta name="theme-color" content="#24456e">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="top">
+ <div class="brand"><span class="mark" aria-hidden="true"></span><div><b>SpinFlow</b><small>Fair. Fast. Offline.</small></div></div>
+ <span class="badge"><i></i>Mode Offline</span>
+ <nav class="actions">
+  <button id="bPanel" title="Tampilkan/sembunyikan panel">Panel</button>
+  <button id="bPres" title="Mode presentasi (ESC untuk keluar)">Presentasi</button>
+  <button id="bFs" title="Layar penuh (F)">Layar Penuh</button>
+  <button id="bSet" class="pri" title="Pengaturan">Pengaturan</button>
+ </nav>
+</header>
+<main>
+ <section class="stage" id="stage">
+  <div id="stats" class="stats"></div>
+  <div class="wheelcard"><canvas id="wheel" width="1000" height="1000" aria-label="Spin wheel"></canvas></div>
+  <button id="spin" class="pri" title="Spin (Space / Enter)">SPIN</button>
+  <p class="hint">Tekan <kbd>Space</kbd> untuk memutar · <kbd>F</kbd> layar penuh</p>
+ </section>
+ <aside class="side">
+  <div class="tabs" role="tablist">
+   <button data-t="p" id="tab-p" role="tab" aria-controls="panel-p" aria-selected="true">Peserta</button>
+   <button data-t="u" id="tab-u" role="tab" aria-controls="panel-u" aria-selected="false" tabindex="-1">Undian</button>
+   <button data-t="h" id="tab-h" role="tab" aria-controls="panel-h" aria-selected="false" tabindex="-1">Riwayat</button>
+  </div>
+  <section class="tab" data-tab="p" id="panel-p" role="tabpanel" aria-labelledby="tab-p">
+   <textarea id="bulk" rows="4" placeholder="Satu nama per baris" aria-label="Daftar nama peserta, satu per baris"></textarea>
+   <div class="row"><button id="bImp" class="pri" title="Tambahkan semua baris sebagai peserta">Impor Peserta</button></div>
+   <div class="row"><input id="one" placeholder="Nama peserta" maxlength="80" aria-label="Nama peserta"><button id="bAdd" class="fit" title="Tambah satu peserta">+ Tambah</button></div>
+   <div class="drop" id="drop" tabindex="0" role="button">Letakkan file di sini<small>TXT, CSV, JSON — atau klik untuk memilih</small></div>
+   <input type="file" id="file" accept=".txt,.csv,.json" hidden>
+   <label class="field">Nama duplikat saat ditambahkan
+    <select id="dup"><option value="ask">Tanya dulu</option><option value="allow">Izinkan duplikat</option><option value="remove">Hapus otomatis</option></select></label>
+   <input id="q" placeholder="Cari peserta" aria-label="Cari peserta">
+   <ul class="list" id="plist"></ul><p class="note" id="pnote"></p>
+   <div class="row"><button id="xT">Ekspor TXT</button><button id="xC">Ekspor CSV</button><button id="xJ">Ekspor JSON</button></div>
+   <div class="row"><button id="bClear" class="dng" title="Hapus semua peserta">Hapus Semua</button></div>
+  </section>
+  <section class="tab" data-tab="u" id="panel-u" role="tabpanel" aria-labelledby="tab-u" hidden>
+   <label class="field">Nama Hadiah / Kategori
+    <input id="cat" placeholder="Contoh: Kulkas / TV / Sepeda" maxlength="50" aria-label="Nama Hadiah atau Kategori"></label>
+   <label class="field">Jumlah Pemenang
+    <select id="wn"><option>1</option><option>2</option><option>3</option><option>5</option><option>10</option><option value="c">Kustom</option></select></label>
+   <input id="wc" type="number" min="1" style="display:none" aria-label="Jumlah pemenang kustom">
+   <label class="field">Mode
+    <select id="mode"><option value="seq">Berurutan (putar satu per satu)</option><option value="inst">Acak Instan</option></select></label>
+   <label class="field">Setelah Menang
+    <select id="rem"><option value="1">Keluarkan pemenang dari roda</option><option value="0">Tetap di roda</option></select></label>
+   <h3>Reset</h3>
+   <div class="row"><button id="r1">Reset Roda</button><button id="r2">Reset Pemenang</button></div>
+   <div class="row"><button id="r3" class="dng">Reset Sesi</button><button id="r4" class="dng">Reset Pabrik</button></div>
+  </section>
+  <section class="tab" data-tab="h" id="panel-h" role="tabpanel" aria-labelledby="tab-h" hidden>
+   <ul class="list tall" id="hlist"></ul>
+   <div class="row"><button id="hX" title="Ekspor hasil (CSV)">Ekspor Hasil</button><button id="hC" class="dng">Bersihkan</button></div>
+  </section>
+ </aside>
+</main>
+<dialog id="dm" aria-label="Dialog"><div id="dmb"></div></dialog>
+<dialog id="ds" aria-labelledby="dst"><h2 id="dst">Pengaturan</h2><div class="gs" id="gs"></div><div class="btns"><button class="pri" id="dsx">Tutup</button></div></dialog>
+<canvas id="fx" popover="manual"></canvas>
+<div id="toasts" aria-live="polite"></div>
+<div id="live" class="sr" aria-live="assertive" role="status"></div>
+<script src="app.js"></script>
+</body></html>
